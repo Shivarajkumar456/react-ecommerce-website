@@ -6,6 +6,7 @@ import Contact from '../../Pages/Contact';
 import {BrowserRouter as Router , Switch , Route , Link , Redirect   } from 'react-router-dom';
 import Product from '../Products/Product';
 import Home from '../../Pages/Home';
+import ProductPage from '../Products/ProductPage';
 
 const Header = (props) => {
   return (
@@ -51,6 +52,9 @@ const Header = (props) => {
             <Route path="/" exact>
               <Home />
             </Route>
+            <Route path="/store/:storeid">
+              <ProductPage key={props.product.id} product={props.product} />
+            </Route> 
       </Switch>
       </Router>
     </>

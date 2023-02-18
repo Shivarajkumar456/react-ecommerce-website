@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useEffect, useContext} from "react";
 import ProductItem from "./ProductItem";
 import { Container, Row} from "react-bootstrap";
+import CartContext from "../../store/cart-context";
 const DummyData = [
     {
         id:'p1',
@@ -35,13 +36,38 @@ const DummyData = [
 ]
 
 const AvailableProduct = (props)=> {
+    const cartCtx = useContext(CartContext);
 
+ useEffect(()=>{
+  const email = localStorage.getItem("email");
+  const str = email.replace("@", "");
+  const newstr = str.replace(".", "");
+
+  fetch(` https://crudcrud.com/api/61c83dff74b64843bddfb8d1554499d0/cart${newstr}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  ).then(res=>{
+    return res.json(); 
+  }).then(data=>{
+    let totalAmount =0
+     data.forEach(element => {
+         totalAmount += element.quantity*element.price
+     });
+    cartCtx.setData(data , totalAmount);
+  }).catch(error=>{
+    console.log(error.message)
+  })
+ },[])
     return (
         <Container>
             <Row>
                 {
                     DummyData.map((item)=>
-                            <ProductItem id={item.id} title={item.title} price={item.price} src={item.imageUrl} quantity={item.quantity} />
+                            <ProductItem key={item.id} id={item.id} title={item.title} price={item.price} src={item.imageUrl} quantity={item.quantity} />
                     )
                 }
             </Row>

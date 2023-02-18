@@ -8,19 +8,20 @@ import Product from '../Products/Product';
 import Home from '../../Pages/Home';
 import ProductPage from '../Products/ProductPage';
 import Login from '../../Pages/Login';
-import AuthContext from '../../store/auth-context';
+import CartContext from '../../store/cart-context';
 
 const Header = (props) => {
-  const authCtx = useContext(AuthContext);
-  const isLoggedIn = authCtx.isLoggedIn;
+  const cartCtx = useContext(CartContext);
+  const isLoggedIn = cartCtx.isLoggedIn;
   const history = useHistory();
+
   const logoutHandler=()=>{
-    authCtx.logout();
+    cartCtx.logout();
     console.log("logout done");
-    localStorage.removeItem("token");
-    history.replace("/home");
-    
+    localStorage.removeItem("email");
+    history.replace('/home');
   }
+
   return (
     <>
     <Router>
@@ -34,7 +35,7 @@ const Header = (props) => {
           {!isLoggedIn && <Nav.Link as={Link} to={"/login"}>Login</Nav.Link>}
           {isLoggedIn && <Nav.Link as={Link} onClick={logoutHandler}>LogOut</Nav.Link>}
         </Nav>
-        {authCtx.login && <HeaderButton onClick={props.onShow}/>}
+        {isLoggedIn && <HeaderButton onClick={props.onShow}/>}
       </Navbar>
       <div
         style={{

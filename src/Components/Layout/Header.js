@@ -19,7 +19,7 @@ const Header = (props) => {
     cartCtx.logout();
     console.log("logout done");
     localStorage.removeItem("email");
-    history.replace('/home');
+    history.replace('/');
   }
 
   return (

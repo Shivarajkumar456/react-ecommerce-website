@@ -176,6 +176,7 @@ const CartProvider =  (props) => {
     //    item1._id
     // })
     let updatedDeleteCart= cart.filter(item1=>item1.id==item.id)
+    console.log(cart);
 
     const updatedItems = cart.filter(
        (item1) =>item1.id != item.id 
@@ -185,7 +186,7 @@ const CartProvider =  (props) => {
    // setCart(updatedItems);
     //setTotalAmount(newTotalAmount)
     
-    await deleteCart(updatedDeleteCart[0]._id)
+    await deleteCart(updatedDeleteCart[0]._id);
     const data = await getCartItemsFromCrud();
 
     setCart(data );

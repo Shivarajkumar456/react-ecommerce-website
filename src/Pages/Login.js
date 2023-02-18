@@ -47,8 +47,7 @@ import AuthContext from '../store/auth-context';
             //console.log(data.idToken)
             localStorage.setItem('email' ,enteredEmail )
             authCtx.login(data.idToken)
-            history.replace('/store')
-            alert("Log In Successful")
+            history.replace('/store');
         }else{
              console.log("Sign up Completed")
              alert("Sign Up Successful")

@@ -19,7 +19,7 @@ export const AuthContextProvider=(props)=>{
     }
 
     const logoutHandler=()=>{
-        setToken("");
+        setToken(null);
         localStorage.removeItem('token')
     }
 
@@ -28,7 +28,6 @@ export const AuthContextProvider=(props)=>{
         login : loginHandler,
         logout : logoutHandler,
         isLoggedIn : userLoggedIn 
-
     }
   return (
     <AuthContext.Provider value={contextValue}>{props.chldren}</AuthContext.Provider>

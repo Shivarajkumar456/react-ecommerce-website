@@ -7,6 +7,7 @@ import {BrowserRouter as Router , Switch , Route , Link , Redirect   } from 'rea
 import Product from '../Products/Product';
 import Home from '../../Pages/Home';
 import ProductPage from '../Products/ProductPage';
+import Login from '../../Pages/Login';
 
 const Header = (props) => {
   return (
@@ -19,6 +20,7 @@ const Header = (props) => {
           <Nav.Link as={Link} to='/store'>Store</Nav.Link>
           <Nav.Link as={Link} to='/about'>About</Nav.Link>
           <Nav.Link as={Link} to={"/contact"}>Contact</Nav.Link>
+          {<Nav.Link as={Link} to={"/login"}>Login</Nav.Link>}
         </Nav>
         <HeaderButton onClick={props.onShow}/>
       </Navbar>
@@ -55,6 +57,9 @@ const Header = (props) => {
             <Route path="/store/:storeid">
               <ProductPage key={props.product.id} product={props.product} />
             </Route> 
+            <Route path="/login" exact>
+              <Login />
+            </Route>
       </Switch>
       </Router>
     </>
